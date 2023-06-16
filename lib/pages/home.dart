@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:food_app/models/recipes_data.dart';
 
@@ -62,6 +64,18 @@ class _HomePageState extends State<HomePage> {
                                                       snapshot.data!
                                                           .recipes[index].name
                                                           .toUpperCase()),
+                                                  Row(
+                                                    children: [
+                                                      for (var i = 0;
+                                                          i < 5;
+                                                          i++)
+                                                        Text(snapshot
+                                                            .data!
+                                                            .recipes[index]
+                                                            .tags![i]
+                                                            .displayName)
+                                                    ],
+                                                  )
                                                 ],
                                               ))));
                                 },

@@ -42,9 +42,23 @@ class Recipe {
 
   final String name;
   final String thumbnail;
-  final List<String>? tags;
+  final List<Tags>? tags;
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
-    return Recipe(name: json['name'], thumbnail: json['thumbnail_url']);
+    return Recipe(
+        name: json['name'],
+        thumbnail: json['thumbnail_url'],
+        tags: List<Tags>.from(json['tags'].map((x) => Tags.fromJson(x))));
+  }
+}
+
+class Tags {
+  Tags({required this.id, required this.displayName});
+
+  final int id;
+  final String displayName;
+
+  factory Tags.fromJson(Map<String, dynamic> json) {
+    return Tags(id: json['id'], displayName: json['display_name']);
   }
 }
