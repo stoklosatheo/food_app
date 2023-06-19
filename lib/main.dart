@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.orange,
+            backgroundColor: const Color.fromRGBO(254, 183, 77, 1),
             title: const Text('Food App'),
           ),
           body: const HomePage()),
