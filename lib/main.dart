@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/pages/home.dart';
+import 'package:food_app/pages/home/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,6 +7,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  final primaryColor = const Color.fromRGBO(254, 183, 77, 1);
 
   // This widget is the root of your application.
   @override
