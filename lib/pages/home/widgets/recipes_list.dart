@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/models/recipes_data.dart';
+import 'package:food_app/pages/recipe/recipe.dart' as RecipeDetail;
 
 class RecipesList extends StatefulWidget {
   const RecipesList({super.key});
@@ -37,88 +38,98 @@ class _RecipesListState extends State<RecipesList> {
                 height: 600,
                 child: ListView.separated(
                     itemBuilder: (context, index) {
-                      return Card(
-                          elevation: 3,
-                          child: Container(
-                              height: 200,
-                              decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  image: DecorationImage(
-                                      opacity: 0.8,
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(snapshot
-                                          .data!.recipes[index].thumbnail))),
-                              child: Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                          snapshot.data!.recipes[index].name
-                                              .toUpperCase()),
-                                      Wrap(
-                                        spacing: 10,
-                                        runSpacing: 5,
+                      return GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => RecipeDetail.Recipe(
+                                      snapshot.data!.recipes[index]))),
+                          child: Card(
+                              elevation: 3,
+                              child: Container(
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      image: DecorationImage(
+                                          opacity: 0.8,
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(snapshot.data!
+                                              .recipes[index].thumbnail))),
+                                  child: Padding(
+                                      padding: const EdgeInsets.all(15),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
                                         children: [
-                                          if (snapshot.data!.recipes[index]
-                                                  .tags!.length >
-                                              3)
-                                            for (var i = 0; i < 3; i++)
-                                              Container(
-                                                  color: tagColors[i],
-                                                  child: Padding(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 5),
-                                                      child: Text(
-                                                          snapshot
-                                                              .data!
-                                                              .recipes[index]
-                                                              .tags![i]
-                                                              .displayName
-                                                              .toUpperCase(),
-                                                          style:
-                                                              const TextStyle(
+                                          Text(
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20),
+                                              snapshot.data!.recipes[index].name
+                                                  .toUpperCase()),
+                                          Wrap(
+                                            spacing: 10,
+                                            runSpacing: 5,
+                                            children: [
+                                              if (snapshot.data!.recipes[index]
+                                                      .tags!.length >
+                                                  3)
+                                                for (var i = 0; i < 3; i++)
+                                                  Container(
+                                                      color: tagColors[i],
+                                                      child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  vertical: 5,
+                                                                  horizontal:
+                                                                      5),
+                                                          child: Text(
+                                                              snapshot
+                                                                  .data!
+                                                                  .recipes[
+                                                                      index]
+                                                                  .tags![i]
+                                                                  .displayName
+                                                                  .toUpperCase(),
+                                                              style: const TextStyle(
                                                                   color: Colors
                                                                       .white))))
-                                          else
-                                            for (var i = 0;
-                                                i <
-                                                    snapshot
-                                                        .data!
-                                                        .recipes[index]
-                                                        .tags!
-                                                        .length;
-                                                i++)
-                                              Container(
-                                                  color: tagColors[i],
-                                                  child: Padding(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 5),
-                                                      child: Text(
-                                                          snapshot
-                                                              .data!
-                                                              .recipes[index]
-                                                              .tags![i]
-                                                              .displayName
-                                                              .toUpperCase(),
-                                                          style:
-                                                              const TextStyle(
+                                              else
+                                                for (var i = 0;
+                                                    i <
+                                                        snapshot
+                                                            .data!
+                                                            .recipes[index]
+                                                            .tags!
+                                                            .length;
+                                                    i++)
+                                                  Container(
+                                                      color: tagColors[i],
+                                                      child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  vertical: 5,
+                                                                  horizontal:
+                                                                      5),
+                                                          child: Text(
+                                                              snapshot
+                                                                  .data!
+                                                                  .recipes[
+                                                                      index]
+                                                                  .tags![i]
+                                                                  .displayName
+                                                                  .toUpperCase(),
+                                                              style: const TextStyle(
                                                                   color: Colors
                                                                       .white))))
+                                            ],
+                                          )
                                         ],
-                                      )
-                                    ],
-                                  ))));
+                                      )))));
                     },
                     separatorBuilder: (context, index) {
                       return const SizedBox(height: 10);
