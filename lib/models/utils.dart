@@ -4,19 +4,30 @@ import 'package:google_fonts/google_fonts.dart';
 const primaryColor = Color.fromRGBO(254, 183, 77, 1);
 
 class H1 extends StatelessWidget {
-  const H1(this.myText, {super.key});
+  const H1(this.myText, {this.myColor, super.key});
 
   final String myText;
+  final Color? myColor;
 
   @override
   Widget build(BuildContext context) {
-    return Text(myText,
-        style: GoogleFonts.pacifico(
-            textStyle: const TextStyle(
-          color: primaryColor,
-          fontSize: 28,
-          fontWeight: FontWeight.w700,
-        )));
+    if (myColor != null) {
+      return Text(myText,
+          style: GoogleFonts.pacifico(
+              textStyle: TextStyle(
+            color: myColor,
+            fontSize: 28,
+            fontWeight: FontWeight.w700,
+          )));
+    } else {
+      return Text(myText,
+          style: GoogleFonts.pacifico(
+              textStyle: const TextStyle(
+            color: primaryColor,
+            fontSize: 28,
+            fontWeight: FontWeight.w700,
+          )));
+    }
   }
 }
 

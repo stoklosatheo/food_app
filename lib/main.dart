@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/pages/home/home.dart';
+import 'package:food_app/models/utils.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +30,10 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color.fromRGBO(254, 183, 77, 1),
-            title: const Text('Food App'),
+            title: const H1(
+              'Food App',
+              myColor: Colors.white,
+            ),
           ),
           body: const HomePage()),
       debugShowCheckedModeBanner: false,

@@ -23,22 +23,6 @@ Future<RecipeList> fetchRecipeList() async {
   }
 }
 
-Future<Recipe> fetchRecipe(id) async {
-  final response = await http.get(
-      Uri.parse('https://tasty.p.rapidapi.com/recipes/get-more-info?id=$id'),
-      headers: requestHeaders);
-
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return Recipe.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load recipes');
-  }
-}
-
 class RecipeList {
   RecipeList({required this.recipes});
 
@@ -58,6 +42,9 @@ class Recipe {
       {required this.name,
       required this.thumbnail,
       required this.servings,
+      required this.steps,
+      this.cookingTime,
+      this.prepTime,
       this.tags,
       this.description});
 
@@ -65,7 +52,10 @@ class Recipe {
   final String thumbnail;
   final List<Tags>? tags;
   final String? description;
-  final int? servings;
+  final int servings;
+  final int? cookingTime;
+  final Map<String, dynamic> steps;
+  final int? prepTime;
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(
@@ -73,6 +63,9 @@ class Recipe {
         thumbnail: json['thumbnail_url'],
         description: json['description'],
         servings: json['num_servings'],
+        cookingTime: json['cook_time_minutes'],
+        prepTime: json['prep_time_minutes'],
+        steps: json['instructions'],
         tags: List<Tags>.from(json['tags'].map((x) => Tags.fromJson(x))));
   }
 }
